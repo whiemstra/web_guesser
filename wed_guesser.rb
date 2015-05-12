@@ -1,7 +1,8 @@
 require 'sinatra'
 require 'sinatra/reloader'
 
-SECRET_NUMBER = rand(100)
+@@SECRET_NUMBER = rand(100)
+@@counter = 5
 
 def check_guess(guess, number)
   if guess == number
@@ -17,9 +18,19 @@ def check_guess(guess, number)
   end
 end
 
-
 get '/' do
   guess = params['guess'].to_i
-  message = check_guess(guess, SECRET_NUMBER)
-  erb :index, :locals => {:number => SECRET_NUMBER, :message => message }
+  if guess == @@SECRET_NUMBER
+    message = "Wow, you guessed it! Let's do another."
+    @@SECRET_NUMBER = rand(100)
+    @@counter = 5
+  elsif @@counter > 1
+    message = check_guess(guess, @@SECRET_NUMBER)
+    @@counter -= 1
+  else
+    message = "I'm sorry, you've lost. A new number has been generated. Good luck!"
+    @@SECRET_NUMBER = rand(100)
+    @@counter = 5
+  end
+  erb :index, :locals => {:number => @@SECRET_NUMBER, :message => message }
 end

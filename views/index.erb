@@ -4,13 +4,12 @@
     <style>
       body.very-wrong {
         background-color: red;
-        font-size: 32px;
       }
       body.correct {
         background-color: green;
       }
       body.wrong {
-        background-color: pink;
+        background-color: lightsalmon;
       }
     </style>
   </head>
@@ -24,7 +23,7 @@
   <% end %>
     <p> <%= message %> <br>
       <% if message == "You got it right!" %>
-        The SECRET NUMBER is <%= SECRET_NUMBER %>
+        The SECRET NUMBER is <%= @@SECRET_NUMBER %>
       <% end %>
     </p>
     <p>
