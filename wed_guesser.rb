@@ -5,7 +5,7 @@ SECRET_NUMBER = rand(100)
 
 def check_guess(guess, number)
   if guess == number
-    "You got it right!"
+    return "You got it right!"
   elsif guess > number && (guess - number) > 5
     return "Way too high!"
   elsif guess > number
